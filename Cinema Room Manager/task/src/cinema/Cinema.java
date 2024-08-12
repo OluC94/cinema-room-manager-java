@@ -6,14 +6,23 @@ public class Cinema {
     static Scanner scanner = new Scanner(System.in);
     static Integer rowCount;
     static Integer columnCount;
+    static Integer customerRow;
+    static Integer customerColumn;
+    static Integer ticketPrice;
     
     public static void main(String[] args) {
         // Write your code here
         System.out.println("Cinema:");
         getSeatingPlan();
+        drawSeatingPlan();
+        getCustomerSeat();
+        getTicketPrice();
+        getProfitFromSeatingPlan();
+    }
+
+    private static void drawSeatingPlan() {
         drawRowLabel();
         drawRows();
-        getProfitFromSeatingPlan();
     }
     
     private static void getSeatingPlan() {
@@ -53,6 +62,20 @@ public class Cinema {
             }
 
         }
+    }
+
+    private static void getCustomerSeat() {
+        System.out.println("Enter a row number:");
+        customerRow = scanner.nextInt();
+        System.out.println("Enter a seat number in that row:");
+        customerColumn = scanner.nextInt();
+    }
+
+    private static void getTicketPrice() {
+        boolean isTenDollarRow = rowCount * columnCount <= 60 || customerRow <= rowCount / 2;
+
+        ticketPrice = isTenDollarRow ? 10 : 8;
+        System.out.println("$" + ticketPrice);
     }
 
     private static void getProfitFromSeatingPlan() {
