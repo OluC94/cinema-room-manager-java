@@ -14,11 +14,39 @@ public class Cinema {
     public static void main(String[] args) {
         // Write your code here
         getSeatingPlan();
-        drawSeatingPlan();
-        getCustomerSeat();
-        getTicketPrice();
-        drawSeatingPlan();
+        menu();
+//        drawSeatingPlan();
+//        getCustomerSeat();
+//        getTicketPrice();
+//        drawSeatingPlan();
 //        getProfitFromSeatingPlan();
+    }
+
+    private static void menu(){
+        boolean menuIsActive = true;
+        int option;
+
+        while(menuIsActive){
+            System.out.println("1. Show the seats");
+            System.out.println("2. Buy a ticket");
+            System.out.println("0. Exit");
+
+            option = scanner.nextInt();
+            switch(option){
+                case 1:
+                    drawSeatingPlan();
+                    break;
+                case 2:
+                    getCustomerSeat();
+                    getTicketPrice();
+                    break;
+                case 0:
+                    menuIsActive = false;
+            }
+
+        }
+
+
     }
 
     private static void drawSeatingPlan() {
