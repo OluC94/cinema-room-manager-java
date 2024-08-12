@@ -3,17 +3,28 @@ package cinema;
 import java.util.Scanner;
 
 public class Cinema {
-
+    static Scanner scanner = new Scanner(System.in);
+    static Integer rowCount;
+    static Integer columnCount;
+    
     public static void main(String[] args) {
         // Write your code here
         System.out.println("Cinema:");
+        getSeatingPlan();
         drawRowLabel();
         drawRows();
         getProfitFromSeatingPlan();
     }
+    
+    private static void getSeatingPlan() {
+        System.out.println("Enter the number of rows:");
+        rowCount = scanner.nextInt();
+        System.out.println("Enter the number of seats in each row:");
+        columnCount = scanner.nextInt();
+    }
 
     private static void drawRowLabel() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i <= columnCount; i++) {
             if (i == 0){
                 System.out.print("  ");
                 continue;
@@ -24,20 +35,20 @@ public class Cinema {
     }
 
     private static void drawRows() {
-        for (int row = 1; row < 8; row++) {
+        for (int row = 1; row <= rowCount; row++) {
             drawOneRow(row);
             System.out.println();
         }
     }
 
     private static void drawOneRow(Integer rowNumber) {
-        for (int col = 0; col < 9; col++) {
+        for (int col = 0; col <= columnCount + 1; col++) {
             if (col == 0){
                 System.out.print(rowNumber + " ");
                 continue;
             }
 
-            if (col != 8){
+            if (col != columnCount){
                 System.out.print("S" + " ");
             }
 
@@ -45,7 +56,6 @@ public class Cinema {
     }
 
     private static void getProfitFromSeatingPlan() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of rows:");
         Integer rows =  scanner.nextInt();
         System.out.println("Enter the number of seats in each row:");
@@ -63,6 +73,4 @@ public class Cinema {
         int lowPriceRows = rows - highPriceRows;
         return columns * ( (highPriceRows * 10) + (lowPriceRows * 8));
     }
-
-
 }
