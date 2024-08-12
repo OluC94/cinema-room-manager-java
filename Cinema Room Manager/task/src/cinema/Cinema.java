@@ -82,7 +82,7 @@ public class Cinema {
                 continue;
             }
 
-            if (Objects.equals(rowNumber, customerRow) && Objects.equals(col, customerColumn)){
+            if (isTakenSeat(rowNumber, col)){
                 System.out.print("B" + " ");
             } else if (col != columnCount) {
                 System.out.print("S" + " ");
@@ -104,6 +104,16 @@ public class Cinema {
 
         ticketPrice = isTenDollarRow ? 10 : 8;
         System.out.println("Ticket price: $" + ticketPrice);
+    }
+
+    // iterate through the seat list, return true if there is a match
+    private static boolean isTakenSeat(Integer row, Integer col) {
+        for (Seat seat : seatList) {
+            if (seat.getRow() == row && seat.getColumn() == col) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void getProfitFromSeatingPlan() {

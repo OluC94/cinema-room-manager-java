@@ -18,7 +18,11 @@ public class Seat{
         isBought = true;
     }
 
-    public String displayStatus(){
-        return isBought ? "S" : "B";
+    public int getRow(){
+        return row;
+    }
+
+    public int getColumn(){
+        return column;
     }
 }
