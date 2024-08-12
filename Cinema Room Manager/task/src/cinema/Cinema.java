@@ -101,3 +101,4 @@ public class Cinema {
         return columns * ( (highPriceRows * 10) + (lowPriceRows * 8));
     }
 }
+
