@@ -4,6 +4,7 @@ public class Cinema {
 
     public static void main(String[] args) {
         // Write your code here
+        System.out.println("Cinema:");
         drawRowLabel();
         drawRows();
     }
@@ -16,13 +17,27 @@ public class Cinema {
             }
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
     private static void drawRows() {
-        for (int row = 0; row < 5; row++) {
-            drawOneRow();
+        for (int row = 1; row < 8; row++) {
+            drawOneRow(row);
+            System.out.println();
         }
     }
 
-    private static void drawOneRow() {}
+    private static void drawOneRow(Integer rowNumber) {
+        for (int col = 0; col < 9; col++) {
+            if (col == 0){
+                System.out.print(rowNumber + " ");
+                continue;
+            }
+
+            if (col != 8){
+                System.out.print("S" + " ");
+            }
+
+        }
+    }
 }
