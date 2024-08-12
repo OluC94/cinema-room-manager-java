@@ -1,5 +1,7 @@
 package cinema;
 
+import java.util.Scanner;
+
 public class Cinema {
 
     public static void main(String[] args) {
@@ -7,6 +9,7 @@ public class Cinema {
         System.out.println("Cinema:");
         drawRowLabel();
         drawRows();
+        getProfitFromSeatingPlan();
     }
 
     private static void drawRowLabel() {
@@ -40,4 +43,26 @@ public class Cinema {
 
         }
     }
+
+    private static void getProfitFromSeatingPlan() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of rows:");
+        Integer rows =  scanner.nextInt();
+        System.out.println("Enter the number of seats in each row:");
+        Integer columns = scanner.nextInt();
+        System.out.println("Total income:");
+        System.out.println("$" + calculateProfit(rows, columns));
+    }
+
+    private static Integer calculateProfit(Integer rows, Integer columns) {
+        if (rows * columns <= 60){
+            return rows * columns * 10;
+        }
+
+        int highPriceRows = rows / 2;
+        int lowPriceRows = rows - highPriceRows;
+        return columns * ( (highPriceRows * 10) + (lowPriceRows * 8));
+    }
+
+
 }
