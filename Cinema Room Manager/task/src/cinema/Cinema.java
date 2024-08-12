@@ -1,5 +1,7 @@
 package cinema;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -10,16 +12,12 @@ public class Cinema {
     static Integer customerRow;
     static Integer customerColumn;
     static Integer ticketPrice;
+    static List<Seat> seatList = new ArrayList<Seat>();
     
     public static void main(String[] args) {
         // Write your code here
         getSeatingPlan();
         menu();
-//        drawSeatingPlan();
-//        getCustomerSeat();
-//        getTicketPrice();
-//        drawSeatingPlan();
-//        getProfitFromSeatingPlan();
     }
 
     private static void menu(){
@@ -43,10 +41,7 @@ public class Cinema {
                 case 0:
                     menuIsActive = false;
             }
-
         }
-
-
     }
 
     private static void drawSeatingPlan() {
@@ -101,6 +96,7 @@ public class Cinema {
         customerRow = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
         customerColumn = scanner.nextInt();
+        seatList.add(new Seat(customerRow, customerColumn));
     }
 
     private static void getTicketPrice() {
