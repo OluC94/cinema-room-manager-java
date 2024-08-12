@@ -1,5 +1,6 @@
 package cinema;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Cinema {
@@ -12,15 +13,16 @@ public class Cinema {
     
     public static void main(String[] args) {
         // Write your code here
-        System.out.println("Cinema:");
         getSeatingPlan();
         drawSeatingPlan();
         getCustomerSeat();
         getTicketPrice();
-        getProfitFromSeatingPlan();
+        drawSeatingPlan();
+//        getProfitFromSeatingPlan();
     }
 
     private static void drawSeatingPlan() {
+        System.out.println("Cinema:");
         drawRowLabel();
         drawRows();
     }
@@ -57,7 +59,9 @@ public class Cinema {
                 continue;
             }
 
-            if (col != columnCount){
+            if (Objects.equals(rowNumber, customerRow) && Objects.equals(col, customerColumn)){
+                System.out.print("B" + " ");
+            } else if (col != columnCount) {
                 System.out.print("S" + " ");
             }
 
@@ -75,7 +79,7 @@ public class Cinema {
         boolean isTenDollarRow = rowCount * columnCount <= 60 || customerRow <= rowCount / 2;
 
         ticketPrice = isTenDollarRow ? 10 : 8;
-        System.out.println("$" + ticketPrice);
+        System.out.println("Ticket price: $" + ticketPrice);
     }
 
     private static void getProfitFromSeatingPlan() {
