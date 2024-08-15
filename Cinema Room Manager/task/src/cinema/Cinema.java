@@ -143,6 +143,7 @@ public class Cinema {
 
     private static void showStatistics() {
         int purchasedSeatsCount = purchasedSeats.size();
+        int percentageSeatsTaken = (purchasedSeatsCount / (rowCount * columnCount)) * 100;
     }
 }
 
