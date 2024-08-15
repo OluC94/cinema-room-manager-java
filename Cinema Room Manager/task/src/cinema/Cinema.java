@@ -2,7 +2,6 @@ package cinema;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Cinema {
@@ -12,7 +11,7 @@ public class Cinema {
     static Integer customerRow;
     static Integer customerColumn;
     static Integer ticketPrice;
-    static List<Seat> seatList = new ArrayList<Seat>();
+    static List<Seat> purchasedSeats = new ArrayList<>();
     
     public static void main(String[] args) {
         // Write your code here
@@ -27,6 +26,7 @@ public class Cinema {
         while(menuIsActive){
             System.out.println("1. Show the seats");
             System.out.println("2. Buy a ticket");
+            System.out.println("3. Statistics");
             System.out.println("0. Exit");
 
             option = scanner.nextInt();
@@ -38,8 +38,14 @@ public class Cinema {
                     getCustomerSeat();
                     getTicketPrice();
                     break;
+                case 3:
+                    showStatistics();
+                    break;
                 case 0:
                     menuIsActive = false;
+                    break;
+                default:
+                    System.out.println("Invalid option");
             }
         }
     }
@@ -96,7 +102,7 @@ public class Cinema {
         customerRow = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
         customerColumn = scanner.nextInt();
-        seatList.add(new Seat(customerRow, customerColumn));
+        purchasedSeats.add(new Seat(customerRow, customerColumn));
     }
 
     private static void getTicketPrice() {
@@ -108,7 +114,7 @@ public class Cinema {
 
     // iterate through the seat list, return true if there is a match
     private static boolean isTakenSeat(Integer row, Integer col) {
-        for (Seat seat : seatList) {
+        for (Seat seat : purchasedSeats) {
             if (seat.getRow() == row && seat.getColumn() == col) {
                 return true;
             }
@@ -133,6 +139,10 @@ public class Cinema {
         int highPriceRows = rows / 2;
         int lowPriceRows = rows - highPriceRows;
         return columns * ( (highPriceRows * 10) + (lowPriceRows * 8));
+    }
+
+    private static void showStatistics() {
+        int purchasedSeatsCount = purchasedSeats.size();
     }
 }
 
