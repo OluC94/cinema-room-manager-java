@@ -41,7 +41,7 @@ public class Cinema {
                 case 2:
                     isValidSeatChoice = false;
                     while (!isValidSeatChoice){
-                        getCustomerSeat();
+                        purchaseSeat();
                     }
                     getTicketPrice();
                     break;
@@ -104,7 +104,7 @@ public class Cinema {
         }
     }
 
-    private static void getCustomerSeat() {
+    private static void purchaseSeat() {
         System.out.println("Enter a row number:");
         customerRow = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
@@ -138,7 +138,7 @@ public class Cinema {
         return false;
     }
 
-    private static Integer calculateProfit(Integer rows, Integer columns) {
+    private static int calculateProfit(Integer rows, Integer columns) {
         if (rows * columns <= 60){
             return rows * columns * 10;
         }
