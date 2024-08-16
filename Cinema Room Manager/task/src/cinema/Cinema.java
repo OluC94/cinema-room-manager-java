@@ -1,5 +1,6 @@
 package cinema;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class Cinema {
     static Integer ticketPrice;
     static List<Seat> purchasedSeats = new ArrayList<>();
     static Integer currentIncome = 0;
-    static Boolean isValidSeatChoice;
+    static boolean isValidSeatChoice;
     
     public static void main(String[] args) {
         // Write your code here
@@ -111,6 +112,8 @@ public class Cinema {
 
         if (isTakenSeat(customerRow, customerColumn)){
             System.out.println("That ticket has already been purchased!");
+        } else if (!isSeatInBounds(customerRow, customerColumn)){
+            System.out.println("Wrong input!");
         } else {
             purchasedSeats.add(new Seat(customerRow, customerColumn));
             isValidSeatChoice = true;
@@ -156,15 +159,27 @@ public class Cinema {
 
     private static void showStatistics() {
         int purchasedSeatsCount = purchasedSeats.size();
-        double percentageSeatsTaken = ((double) purchasedSeatsCount / (rowCount * columnCount)) * 100;
-        double roundedPercentage = (double) Math.round(percentageSeatsTaken * 100) / 100;
+        double percentageSeatsTaken = ((double) purchasedSeatsCount / ( rowCount * columnCount)) * 100;
+        double roundedPercentage = getDecimalFormat(percentageSeatsTaken);
         int totalIncome = calculateProfit(rowCount, columnCount);
 
         System.out.println("Number of purchased tickets: " + purchasedSeatsCount);
-        System.out.println("Percentage: " + roundedPercentage + "%");
+        System.out.printf("Percentage: %.2f%%%n", roundedPercentage);
         System.out.println("Current income: $" + currentIncome);
         System.out.println("Total income: $" + totalIncome);
 
+    }
+
+    private static double getDecimalFormat(double num) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        String formattedNum = df.format(num);
+        return Double.parseDouble(formattedNum);
+    }
+
+    private static boolean isSeatInBounds(Integer row, Integer col) {
+        boolean rowInBounds = row <= rowCount && row > 0;
+        boolean colInBounds = col <= columnCount && col > 0;
+        return rowInBounds && colInBounds;
     }
 }
 
