@@ -138,15 +138,6 @@ public class Cinema {
         return false;
     }
 
-    private static void getProfitFromSeatingPlan() {
-        System.out.println("Enter the number of rows:");
-        Integer rows =  scanner.nextInt();
-        System.out.println("Enter the number of seats in each row:");
-        Integer columns = scanner.nextInt();
-        System.out.println("Total income:");
-        System.out.println("$" + calculateProfit(rows, columns));
-    }
-
     private static Integer calculateProfit(Integer rows, Integer columns) {
         if (rows * columns <= 60){
             return rows * columns * 10;
