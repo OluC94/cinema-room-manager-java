@@ -12,6 +12,8 @@ public class Cinema {
     static Integer customerColumn;
     static Integer ticketPrice;
     static List<Seat> purchasedSeats = new ArrayList<>();
+    static Integer currentIncome = 0;
+    static Boolean isValidSeatChoice;
     
     public static void main(String[] args) {
         // Write your code here
@@ -24,6 +26,7 @@ public class Cinema {
         int option;
 
         while(menuIsActive){
+
             System.out.println("1. Show the seats");
             System.out.println("2. Buy a ticket");
             System.out.println("3. Statistics");
@@ -35,7 +38,10 @@ public class Cinema {
                     drawSeatingPlan();
                     break;
                 case 2:
-                    getCustomerSeat();
+                    isValidSeatChoice = false;
+                    while (!isValidSeatChoice){
+                        getCustomerSeat();
+                    }
                     getTicketPrice();
                     break;
                 case 3:
@@ -102,13 +108,20 @@ public class Cinema {
         customerRow = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
         customerColumn = scanner.nextInt();
-        purchasedSeats.add(new Seat(customerRow, customerColumn));
+
+        if (isTakenSeat(customerRow, customerColumn)){
+            System.out.println("That ticket has already been purchased!");
+        } else {
+            purchasedSeats.add(new Seat(customerRow, customerColumn));
+            isValidSeatChoice = true;
+        }
     }
 
     private static void getTicketPrice() {
         boolean isTenDollarRow = rowCount * columnCount <= 60 || customerRow <= rowCount / 2;
 
         ticketPrice = isTenDollarRow ? 10 : 8;
+        currentIncome += ticketPrice;
         System.out.println("Ticket price: $" + ticketPrice);
     }
 
@@ -143,7 +156,15 @@ public class Cinema {
 
     private static void showStatistics() {
         int purchasedSeatsCount = purchasedSeats.size();
-        int percentageSeatsTaken = (purchasedSeatsCount / (rowCount * columnCount)) * 100;
+        double percentageSeatsTaken = ((double) purchasedSeatsCount / (rowCount * columnCount)) * 100;
+        double roundedPercentage = (double) Math.round(percentageSeatsTaken * 100) / 100;
+        int totalIncome = calculateProfit(rowCount, columnCount);
+
+        System.out.println("Number of purchased tickets: " + purchasedSeatsCount);
+        System.out.println("Percentage: " + roundedPercentage + "%");
+        System.out.println("Current income: $" + currentIncome);
+        System.out.println("Total income: $" + totalIncome);
+
     }
 }
 
